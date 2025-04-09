@@ -1,7 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { ShoppingBagIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
+  const { state } = useCart();
+  const cartItemsCount = state.items.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <nav className="bg-white shadow-md fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -22,9 +28,14 @@ const Navbar = () => {
             <button className="p-2 hover:bg-gray-100 rounded-full">
               <UserIcon className="h-6 w-6 text-gray-600" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+            <Link href="/cart" className="p-2 hover:bg-gray-100 rounded-full relative">
               <ShoppingBagIcon className="h-6 w-6 text-gray-600" />
-            </button>
+              {cartItemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItemsCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </div>

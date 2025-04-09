@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 
 const featuredProducts = [
@@ -40,8 +39,6 @@ const featuredProducts = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
-      <Navbar />
-      
       {/* Hero Section */}
       <div className="relative pt-16">
         <div className="h-[60vh] relative">
