@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import { ShoppingBagIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useCart } from '../context/CartContext';
+import { useSearch } from '../context/SearchContext';
 
 const Navbar = () => {
   const { state } = useCart();
+  const { setIsSearchOpen } = useSearch();
   const cartItemsCount = state.items.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -22,7 +24,11 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-full"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search"
+            >
               <MagnifyingGlassIcon className="h-6 w-6 text-gray-600" />
             </button>
             <button className="p-2 hover:bg-gray-100 rounded-full">
